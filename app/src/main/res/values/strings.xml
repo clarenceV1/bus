@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MeetYouBus</string>
+    <string name="location">正在定位中</string>
+    <string name="gpsfollow">追随</string>
+    <string name="gpslocate">定位</string>
+    <string name="gpsrotate">旋转</string>
+    <string name="external_permission">需要读写权限</string>
+    <string name="EXTERNAL_PERMISSION_LOCATION">需要定位权限</string>
+</resources>

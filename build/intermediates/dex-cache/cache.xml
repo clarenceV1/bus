@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/clarence/MeetYouBus/app/libs/AMap_Search_V5.3.0_20170814.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f4c0c42f0d726bb8a1d82e0c3c06897b00ff9830">
+        <dex dex="/Users/clarence/MeetYouBus/app/build/intermediates/pre-dexed/debug/AMap_Search_V5.3.0_20170814_25e0e4141c249025f5322696862b90b1bd19a56b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/clarence/MeetYouBus/app/libs/AMap_Location_V3.5.0_20170731.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a02816310bcf897ef35496950110a65b495574a7">
+        <dex dex="/Users/clarence/MeetYouBus/app/build/intermediates/pre-dexed/debug/AMap_Location_V3.5.0_20170731_62b4c114fd8ad6091609a8d5b03b9fa0cf30acb8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/clarence/MeetYouBus/app/libs/Android_Map3D_SDK_V5.3.0_20170815.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="8e1bcab49134edfa6f74440488dfff14460d3a12">
+        <dex dex="/Users/clarence/MeetYouBus/app/build/intermediates/pre-dexed/debug/Android_Map3D_SDK_V5.3.0_20170815_208e573c1c1e0c057bf77f7cf86bdc4ad8f7e481.jar" />
+    </item>
+
+</items>

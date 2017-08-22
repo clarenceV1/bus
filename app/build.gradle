@@ -1,0 +1,70 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao' // apply plugin
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "com.meetyou.bus"
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 3
+        versionName "2.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+    signingConfigs {
+        release {
+            storeFile file("keystore.jks")
+            storePassword "111111"
+            keyAlias "chinese"
+            keyPassword "111111"
+        }
+    }
+    buildTypes {
+        //打包混淆
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            shrinkResources true
+            //  proguardFiles 'proguard-rules.pro'
+        }
+        //打包不混淆，仅仅用于开发中
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+greendao {
+    schemaVersion 5
+}
+
+
+dependencies {
+    compile fileTree(dir: 'libs', include: '*.jar')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    testCompile 'junit:junit:4.12'
+
+    compile 'com.alibaba:fastjson:1.2.36'
+    compile 'com.squareup.okhttp3:okhttp:3.8.1'
+
+    compile 'org.greenrobot:greendao:3.2.2' // add library
+
+    compile 'com.jakewharton.rxbinding:rxbinding:1.0.1'
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'io.reactivex:rxjava:1.2.9'
+
+    compile 'net.zetetic:android-database-sqlcipher:3.5.6'
+}
