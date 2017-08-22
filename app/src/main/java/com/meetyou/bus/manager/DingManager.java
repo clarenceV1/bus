@@ -59,11 +59,11 @@ public class DingManager {
     }
 
     public void sendDing(final Context context, final StationDO stationDO) {
-        RxQuery<UserDO> stationRxQuery = daoSession.getUserDODao().queryBuilder()
+        RxQuery<UserDO> userDoRxQuery = daoSession.getUserDODao().queryBuilder()
                 .where(UserDODao.Properties.StationId.eq(stationDO.getId()))
                 .orderAsc(UserDODao.Properties.Name).rx();
 
-        stationRxQuery.list()
+        userDoRxQuery.list()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<List<UserDO>>() {
                     @Override

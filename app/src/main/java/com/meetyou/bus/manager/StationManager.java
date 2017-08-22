@@ -30,9 +30,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action;
 import rx.functions.Action1;
+import rx.functions.Func1;
 
 /**
  * Created by clarence on 2017/8/17.
@@ -51,17 +53,17 @@ public class StationManager {
 
     public void deleteStation(StationDO stationDO, final StationManagerAdapter adapter) {
         stationRxDao.delete(stationDO)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<Void>() {
+                .flatMap(new Func1<Void, Observable<List<StationDO>>>() {
                     @Override
-                    public void call(Void aVoid) {
-                        Action1 action1 = new Action1<List<StationDO>>() {
-                            @Override
-                            public void call(List<StationDO> userDOs) {
-                                adapter.setStations(userDOs);
-                            }
-                        };
-                        updateStationList(action1);
+                    public Observable<List<StationDO>> call(Void aVoid) {
+                        return stationRxQueryDao.list();
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<List<StationDO>>() {
+                    @Override
+                    public void call(List<StationDO> stationDOs) {
+                        adapter.setStations(stationDOs);
                     }
                 });
     }
@@ -97,16 +99,18 @@ public class StationManager {
 
     public void addMarkers(final Activity activity, final AMap aMap, final boolean draggable) {
         stationRxQueryDao.list()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<List<StationDO>>() {
+                .flatMap(new Func1<List<StationDO>, Observable<StationDO>>() {
                     @Override
-                    public void call(List<StationDO> stations) {
-                        if (stations != null && stations.size() > 0) {
-                            for (StationDO station : stations) {
-                                if (station.getLatitude() != 0 && station.getLongitude() != 0) {
-                                    addMarker(activity, station, aMap, draggable);
-                                }
-                            }
+                    public Observable<StationDO> call(List<StationDO> stationDOs) {
+                        return Observable.from(stationDOs);
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<StationDO>() {
+                    @Override
+                    public void call(StationDO station) {
+                        if (station.getLatitude() != 0 && station.getLongitude() != 0) {
+                            addMarker(activity, station, aMap, draggable);
                         }
                     }
                 });
